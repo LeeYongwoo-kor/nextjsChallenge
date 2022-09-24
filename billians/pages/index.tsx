@@ -1,75 +1,69 @@
 import { NextPage } from "next";
-import Head from "next/head";
+import { useForm } from "react-hook-form";
 
 const Home: NextPage = () => {
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: "onChange",
+  });
+  const onValid = () => {
+    const success: HTMLElement | null = document.querySelector("#success");
+    if (success) {
+      success.innerText = `Hello, Mr ${watch("username")}`;
+    }
+  };
+  const onInvalid = () => {};
   return (
-    <>
-      <Head>
-        <title>Booking.com</title>
-      </Head>
-      <div>
+    <form onSubmit={handleSubmit(onValid, onInvalid)}>
+      <main>
         <div>
-          <header>
-            <nav>
-              <div>Booking.com</div>
-              <div>Hamburger Button</div>
-            </nav>
-          </header>
+          Name:
+          <input
+            {...register("username", {
+              required: "Please write down your username",
+            })}
+            type="text"
+          />
+          {errors.username?.message}
         </div>
-        <div id="app">
-          <div id="container">
-            <div id="panel">
-              <div id="transition-container">
-                <div id="transition-panel">
-                  <div>
-                    <h1>Sign in with your Phone</h1>
-                  </div>
-                  <form id="nw-phone">
-                    <div id="nw-phone-large">
-                      <label>Phone number</label>
-                      <div id="phone">
-                        <select></select>
-                        <input type="tel"></input>
-                      </div>
-                    </div>
-                    <button>Continue with phone</button>
-                    <div id="access_social">
-                      <div>
-                        <div />
-                        <span>or use one of these options</span>
-                        <div />
-                      </div>
-                      <div>
-                        <a></a>
-                        <a></a>
-                        <a></a>
-                      </div>
-                      <div>
-                        <button>More ways to sign in</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          <footer>
-            <div>
-              <div>
-                By signing in or creating an account, you agree with out Terms &
-                conditions and to the processing and sharing of your personal
-                data in accordance with our Privacy statement
-              </div>
-              <div>
-                <div>
-                  All rights reserved. Copyright (1994 - 2022) - Yoshi.com™
-                </div>
-              </div>
-            </div>
-          </footer>
+        <div>
+          Email:
+          <input
+            {...register("email", {
+              required: "Please write down your email",
+              pattern: {
+                message: "Only @naver emails allowed",
+                value: /[a-zA-Z0-9]+@naver.com/gi,
+              },
+            })}
+            type="email"
+            placeholder="Only @naver.com"
+          />
+          {errors.email?.message}
         </div>
-      </div>
-    </>
+        <div>
+          Password:
+          <input
+            {...register("password", {
+              required: "Please write down your password",
+              minLength: {
+                message: "Password has to be more than 10 chars",
+                value: 10,
+              },
+            })}
+            type="password"
+            placeholder="Min 10 Characters"
+          />
+          {errors.password?.message}
+        </div>
+      </main>
+      <button>Log in</button>
+      <div id="success">{isValid && "All Check is valid"}</div>
+    </form>
   );
 };
 

@@ -1,4 +1,4 @@
-# Billians
+# Practice
 
 ## 1. Intial Settings
 
@@ -23,6 +23,9 @@
 > > npm install -D prettier prettier-plugin-tailwindcss
 > > npm i @tailwindcss/forms
 
+> React-Hook-Form
 >
+> > npm i react-hook-form
+> > (npm i react-hook-form --legacy-peer-deps)
 
 ---
