@@ -28,4 +28,8 @@
 > > npm i react-hook-form
 > > (npm i react-hook-form --legacy-peer-deps)
 
+> NextAuth
+>
+> > npm install next-auth
+
 ---

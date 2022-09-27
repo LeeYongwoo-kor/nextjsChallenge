@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { useForm } from "react-hook-form";
+import SocialLogin from "./components/socialLogin";
 
 const Home: NextPage = () => {
   const {
@@ -18,8 +19,8 @@ const Home: NextPage = () => {
   };
   const onInvalid = () => {};
   return (
-    <form onSubmit={handleSubmit(onValid, onInvalid)}>
-      <main>
+    <main>
+      <form onSubmit={handleSubmit(onValid, onInvalid)}>
         <div>
           Name:
           <input
@@ -60,10 +61,14 @@ const Home: NextPage = () => {
           />
           {errors.password?.message}
         </div>
-      </main>
-      <button>Log in</button>
-      <div id="success">{isValid && "All Check is valid"}</div>
-    </form>
+
+        <button>Log in</button>
+        <div id="success">{isValid && "All Check is valid"}</div>
+      </form>
+      <form>
+        <SocialLogin />
+      </form>
+    </main>
   );
 };
 
