@@ -13,7 +13,7 @@ export default function SocialLogin() {
   return (
     <>
       Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      <button onClick={() => signIn("google")}>Google in</button>
     </>
   );
 }
