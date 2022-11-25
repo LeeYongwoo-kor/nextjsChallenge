@@ -44,15 +44,19 @@ const style = css`
     margin-bottom: 50px;
   }
 
+  h2,
+  h3 {
+    margin-bottom: 10px;
+  }
+
   h2 {
     font-size: 1.5em;
     font-weight: 600;
   }
 
   h3 {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 500;
-    margin: 10px 0px;
   }
 
   img {
@@ -67,8 +71,8 @@ const style = css`
   }
 
   .financial-assets > div {
-    border: 1px solid white;
-    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
     padding: 10px;
   }
 `;
@@ -90,6 +94,14 @@ const Person: NextPage = () => {
   useEffect(() => {
     getProfile();
   }, [router]);
+
+  const formatNumber = (exerciseOptionPrice: number) => {
+    const formatter = new Intl.NumberFormat("en", {
+      style: "currency",
+      currency: "USD",
+    });
+    return formatter.format(exerciseOptionPrice);
+  };
 
   return (
     <main>
@@ -113,10 +125,13 @@ const Person: NextPage = () => {
                   <div key={idx}>
                     {asset.ticker ? <h3>Ticker: {asset.ticker}</h3> : null}
                     {asset.numberOfShares ? (
-                      <h3>Shares: {asset.numberOfShares}</h3>
+                      <h3>Shares: {asset.numberOfShares.toLocaleString()}</h3>
                     ) : null}
                     {asset.exerciseOptionPrice ? (
-                      <h3>Exercise Price: {asset.exerciseOptionPrice}</h3>
+                      <h3>
+                        Exercise Price:{" "}
+                        {formatNumber(asset.exerciseOptionPrice)}
+                      </h3>
                     ) : null}
                   </div>
                 ))}
