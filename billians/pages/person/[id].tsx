@@ -81,17 +81,17 @@ const Person: NextPage = () => {
   const router = useRouter();
   const [profile, setProfile] = useState<IProfile>();
 
-  const getProfile = async () => {
-    if (router?.query?.id) {
-      const data = await getApi<IProfile>(
-        `https://billions-api.nomadcoders.workers.dev/person/${router.query.id}`
-      );
-
-      setProfile(data as any);
-    }
-  };
-
   useEffect(() => {
+    const getProfile = async () => {
+      if (router?.query?.id) {
+        const data = await getApi<IProfile>(
+          `https://billions-api.nomadcoders.workers.dev/person/${router.query.id}`
+        );
+
+        setProfile(data as any);
+      }
+    };
+
     getProfile();
   }, [router]);
 

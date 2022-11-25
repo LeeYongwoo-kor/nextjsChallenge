@@ -55,15 +55,15 @@ export default function Billionaire() {
   const router = useRouter();
   const [billionaire, setBillionaire] = useState<IBillionaire[]>([]);
 
-  const getBillionaire = async () => {
-    const data = await getApi<IBillionaire>(
-      "https://billions-api.nomadcoders.workers.dev/"
-    );
-
-    setBillionaire(data as any);
-  };
-
   useEffect(() => {
+    const getBillionaire = async () => {
+      const data = await getApi<IBillionaire>(
+        "https://billions-api.nomadcoders.workers.dev/"
+      );
+
+      setBillionaire(data as any);
+    };
+
     getBillionaire();
   }, []);
 
