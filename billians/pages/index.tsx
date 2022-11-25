@@ -1,14 +1,17 @@
 import { NextPage } from "next";
-import { useForm } from "react-hook-form";
-import SocialLogin from "./components/socialLogin";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+
+const BillionaireComponent = dynamic(() => import("./components/Billionaire"), {
+  suspense: true,
+});
 
 const Home: NextPage = () => {
   return (
     <main>
-      <h1>Welcome {username}!!</h1>
-      <p>Your email is: {email}</p>
-
-      <SocialLogin />
+      <Suspense fallback={<p>Loading...</p>}>
+        <BillionaireComponent />
+      </Suspense>
     </main>
   );
 };
